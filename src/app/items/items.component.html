@@ -1,0 +1,24 @@
+<form [formGroup]="createItemForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Producto" formControlName="name" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Descripcion" formControlName="description" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="0.0" formControlName="price" />
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <button type="submit" class="btn btn-default">Crear</button>
+  </div>
+</form>
