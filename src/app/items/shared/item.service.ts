@@ -17,9 +17,15 @@ export class ItemService {
   constructor(private http: HttpClient) {}
 
   add(item: Item): Observable<Item> {
-    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
-      tap((newItem: Item) => console.log(`added item w/ id=${newItem.id}`)),
-      catchError(this.handleError<Item>('add'))
+    return this.http
+      .post<Item>(this.url, item, this.httpOptions)
+      .pipe(tap((item: Item) => console.log(`added item id=${item.id}`)));
+  }
+
+  get(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.url).pipe(
+      tap((_) => console.log('fetched items')),
+      catchError(this.handleError<Item[]>('get', []))
     );
   }
 
@@ -31,7 +37,11 @@ export class ItemService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      // TODO: send the error to a remote logging infrastructure
       console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      // this.log(`${operation} failed: ${error.message}`);
 
       // let the app keep working by returning an empty result.
       return of(result as T);
