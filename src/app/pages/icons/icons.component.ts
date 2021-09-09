@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemsComponent } from '@app/items/items.component';
 
 @Component({
   selector: 'app-icons',

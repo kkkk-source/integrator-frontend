@@ -10,20 +10,13 @@ import { ItemService } from '@app/items/shared/item.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent implements OnInit {
-  createItemForm = this.formBuilder.group({
-    name: '',
-    description: '',
-    price: 0,
-  });
+  items = ['a', 'b'];
 
-  constructor(private formBuilder: FormBuilder, private itemService: ItemService) {}
+  constructor() {}
 
   ngOnInit() {}
 
-  onSubmit(): void {
-    console.warn('You order has been submitted', this.createItemForm.value);
-    this.itemService.add({ ...this.createItemForm.value } as Item).subscribe((item) => {
-      this.createItemForm.reset();
-    });
+  update(): void {
+    this.items.push('c');
   }
 }

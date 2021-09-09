@@ -14,8 +14,8 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { ToastrModule } from 'ngx-toastr';
-
-import { ItemsComponent } from '@app/items/items.component';
+//
+import { ItemsModule } from '@app/items/items.module';
 
 @NgModule({
   imports: [
@@ -25,14 +25,9 @@ import { ItemsComponent } from '@app/items/items.component';
     NgbModule,
     ClipboardModule,
     ReactiveFormsModule,
+
+    ItemsModule,
   ],
-  declarations: [
-    DashboardComponent,
-    UserProfileComponent,
-    TablesComponent,
-    IconsComponent,
-    MapsComponent,
-    ItemsComponent,
-  ],
+  declarations: [DashboardComponent, UserProfileComponent, TablesComponent, IconsComponent, MapsComponent],
 })
 export class AdminLayoutModule {}
