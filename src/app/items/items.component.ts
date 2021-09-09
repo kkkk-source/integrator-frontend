@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { Item } from '@app/items/shared/item.model';
-import { ItemService } from '@app/items/shared/item.service';
 
 @Component({
   selector: 'app-items',
@@ -10,13 +9,6 @@ import { ItemService } from '@app/items/shared/item.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent implements OnInit {
-  items = ['a', 'b'];
-
-  constructor() {}
-
+  items: Item[] = [];
   ngOnInit() {}
-
-  update(): void {
-    this.items.push('c');
-  }
 }
