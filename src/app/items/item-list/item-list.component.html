@@ -1,3 +1,4 @@
+<!-- table -->
 <div style="overflow-x: visible" class="table-responsive h-auto">
   <table class="table align-items-center table-flush">
     <thead class="thead-light">
@@ -39,4 +40,19 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- pagination -->
+<div class="card-footer py-4">
+  <nav aria-label="...">
+    <ul class="pagination justify-content-end mb-0">
+      <ngb-pagination
+        (pageChange)="pageChange($event)"
+        [collectionSize]="collectionSize"
+        [pageSize]="pageSize"
+        [(page)]="page"
+        aria-label="Default pagination"
+      ></ngb-pagination>
+    </ul>
+  </nav>
 </div>

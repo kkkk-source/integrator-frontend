@@ -10,13 +10,11 @@ import { ItemService } from '@app/items/shared/item.service';
   styleUrls: ['./items.component.css'],
 })
 export class ItemsComponent implements OnInit {
-  items = ['a', 'b'];
+  items: Item[] = [];
 
-  constructor() {}
+  constructor(private itemService: ItemService) {}
 
   ngOnInit() {}
 
-  update(): void {
-    this.items.push('c');
-  }
+  update(): void {}
 }
