@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
 import { Item } from '@app/items/shared/item.model';
+import { Pagination } from '@app/shared/pagination.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,10 +24,10 @@ export class ItemService {
       .pipe(tap((item: Item) => console.log(`added item id=${item.id}`)));
   }
 
-  get(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.url).pipe(
+  get(page: number = 1, limit: number = 10): Observable<Pagination<Item>> {
+    return this.http.get<Pagination<Item>>(`${this.url}?page=${page}&limit=${limit}`).pipe(
       tap((_) => console.log('fetched items')),
-      catchError(this.handleError<Item[]>('get', []))
+      catchError(this.handleError<Pagination<Item>>('get', {} as Pagination<Item>))
     );
   }
 
