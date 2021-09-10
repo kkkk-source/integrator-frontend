@@ -12,7 +12,7 @@ export class ItemListComponent implements OnInit {
   @Input() items = [];
 
   // pagination params
-  readonly pageSize = 10;
+  readonly pageSize = 5;
   collectionSize = 0;
   page = 1;
 

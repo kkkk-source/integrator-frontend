@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { FormBuilder } from '@angular/forms';
 
 import { Item } from '@app/items/shared/item.model';
@@ -10,5 +11,10 @@ import { Item } from '@app/items/shared/item.model';
 })
 export class ItemsComponent implements OnInit {
   items: Item[] = [];
+
+  constructor(private titleService: Title) {
+    this.titleService.setTitle(`${this.titleService.getTitle()} | items`);
+  }
+
   ngOnInit() {}
 }

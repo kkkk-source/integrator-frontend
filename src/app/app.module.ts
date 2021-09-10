@@ -1,6 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -12,17 +11,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
+import { UdpCurrencyMaskPipe } from '@app/shared/pipes/udp-currency-mask.pipe';
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ComponentsModule,
-    NgbModule,
-    RouterModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-  ],
+  imports: [BrowserAnimationsModule, HttpClientModule, ComponentsModule, NgbModule, RouterModule, AppRoutingModule],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [],
   bootstrap: [AppComponent],

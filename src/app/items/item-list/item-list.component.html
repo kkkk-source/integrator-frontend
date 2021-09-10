@@ -21,7 +21,7 @@
         </th>
 
         <td>{{ item.description }}</td>
-        <td>{{ item.price }}</td>
+        <td>{{ item.price | currency: 'USD':'symbol':'1.0-1' }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.updatedAt | date: 'short' }}</td>
         <td>{{ item.createdAt | date: 'short' }}</td>

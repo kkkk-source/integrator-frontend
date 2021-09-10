@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ import { ItemCreateComponent } from '@app/items/item-create/item-create.componen
 
 @NgModule({
   declarations: [ItemsComponent, ItemListComponent, ItemCreateComponent],
-  imports: [CommonModule, NgbModule, ReactiveFormsModule],
+  imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule],
   exports: [ItemsComponent, ItemListComponent],
+  providers: [CurrencyPipe],
 })
 export class ItemsModule {}
