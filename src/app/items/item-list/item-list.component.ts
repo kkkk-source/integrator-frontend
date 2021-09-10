@@ -9,7 +9,7 @@ import { ItemService } from '@app/items/shared/item.service';
   styleUrls: ['./item-list.component.scss'],
 })
 export class ItemListComponent implements OnInit {
-  @Input() items = [];
+  @Input() items: Item[];
 
   // pagination params
   readonly pageSize = 5;
