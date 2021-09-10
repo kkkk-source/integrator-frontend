@@ -39,6 +39,7 @@
             itemForm.controls['name']?.dirty && itemForm.controls['name']?.invalid ? 'is-invalid' : ''
           ]"
           placeholder="Item's Name"
+          value=""
           required
         />
         <div *ngIf="itemForm.controls['name']?.dirty && itemForm.controls['name']?.invalid" class="invalid-feedback">
@@ -86,6 +87,7 @@
               itemForm.controls['price']?.dirty && itemForm.controls['price']?.invalid ? 'is-invalid' : ''
             ]"
             placeholder="Price"
+            value=""
             required
           />
           <div class="invalid-feedback">Please provide a valid amount.</div>
