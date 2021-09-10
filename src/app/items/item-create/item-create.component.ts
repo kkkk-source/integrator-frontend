@@ -56,6 +56,12 @@ export class ItemCreateComponent implements OnInit {
       (item) => {
         this.modalReference.close();
         this.itemForm.reset();
+        this.itemForm.patchValue({
+          name: '',
+          price: '',
+          quantity: 0,
+          description: '',
+        });
       },
       (err) => console.log(err)
     );
