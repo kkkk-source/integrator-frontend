@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,8 +13,10 @@ import { ItemService } from '@app/items/shared/item.service';
   styleUrls: ['./item-create.component.scss'],
 })
 export class ItemCreateComponent implements OnInit {
-  modalReference: NgbModalRef;
+  @Input() items: Item[];
+  @Output() itemsChange = new EventEmitter<Item[]>();
 
+  modalReference: NgbModalRef;
   itemForm: FormGroup;
 
   constructor(
@@ -62,6 +64,10 @@ export class ItemCreateComponent implements OnInit {
           quantity: 0,
           description: '',
         });
+
+        this.items.pop();
+        this.items.unshift(item);
+        this.itemsChange.emit(this.items);
       },
       (err) => console.log(err)
     );

@@ -4,9 +4,9 @@
       <div class="card shadow">
         <div class="d-flex justify-content-between card-header border-0">
           <h3 class="mb-0">Items</h3>
-          <app-item-create></app-item-create>
+          <app-item-create [(items)]="items"></app-item-create>
         </div>
-        <app-item-list [items]="items"></app-item-list>
+        <app-item-list [(items)]="items"></app-item-list>
       </div>
     </div>
   </div>

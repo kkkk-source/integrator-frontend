@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,11 +12,12 @@ import { ItemService } from '@app/items/shared/item.service';
 })
 export class ItemListComponent implements OnInit {
   @Input() items: Item[];
-  itemToDelete: Item;
+  @Output() itemsChange = new EventEmitter<Item[]>();
 
-  // pagination params
+
   readonly pageSize = 5;
   collectionSize = 0;
+  itemToDelete: Item;
   page = 1;
 
   constructor(private modalService: NgbModal, private itemService: ItemService) {}
@@ -46,7 +47,7 @@ export class ItemListComponent implements OnInit {
   private fetchItemsPaginatedAt(page: number): void {
     this.itemService.get(page).subscribe(
       (pagination) => {
-        this.items = pagination.data;
+        this.itemsChange.emit(pagination.data);
         this.collectionSize = pagination.total;
       },
       (err) => console.log(err)
