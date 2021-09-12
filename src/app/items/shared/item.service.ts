@@ -19,15 +19,25 @@ export class ItemService {
   constructor(private http: HttpClient) {}
 
   add(item: Item): Observable<Item> {
-    return this.http
-      .post<Item>(this.url, item, this.httpOptions)
-      .pipe(tap((item: Item) => console.log(`added item id=${item.id}`)));
+    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
+      tap((item: Item) => console.log(`added item id=${item.id}`)),
+      catchError(this.handleError<Item>('add'))
+    );
   }
 
   get(page: number = 1, limit: number = 5): Observable<Pagination<Item>> {
-    return this.http.get<Pagination<Item>>(`${this.url}?page=${page}&limit=${limit}`).pipe(
+    const url = `${this.url}?page=${page}&limit=${limit}`;
+    return this.http.get<Pagination<Item>>(url).pipe(
       tap((_) => console.log('fetched items')),
-      catchError(this.handleError<Pagination<Item>>('get', {} as Pagination<Item>))
+      catchError(this.handleError<Pagination<Item>>('get'))
+    );
+  }
+
+  remove(item: Item): Observable<Item> {
+    const url = `${this.url}/${item.id}`;
+    return this.http.delete<Item>(url, this.httpOptions).pipe(
+      tap((_) => console.log(`deleted hero id=${item.id}`)),
+      catchError(this.handleError<Item>('delete'))
     );
   }
 
@@ -41,10 +51,8 @@ export class ItemService {
     return (error: any): Observable<T> => {
       // TODO: send the error to a remote logging infrastructure
       console.error(error); // log to console instead
-
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
-
       // let the app keep working by returning an empty result.
       return of(result as T);
     };
