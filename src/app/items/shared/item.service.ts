@@ -33,6 +33,13 @@ export class ItemService {
     );
   }
 
+  update(item: Item): Observable<Item> {
+    return this.http.patch<Item>(this.url, item, this.httpOptions).pipe(
+      tap((_) => console.log(`updated item id=${item.id}`)),
+      catchError(this.handleError<Item>('update'))
+    );
+  }
+
   remove(item: Item): Observable<Item> {
     const url = `${this.url}/${item.id}`;
     return this.http.delete<Item>(url, this.httpOptions).pipe(

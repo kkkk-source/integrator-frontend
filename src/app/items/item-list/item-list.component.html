@@ -32,8 +32,8 @@
               <i class="fas fa-ellipsis-v"></i>
             </a>
             <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-              <a class="dropdown-item" href="#">Edit</a>
-              <a class="dropdown-item" (click)="open(content, i)" href="#">Delete</a>
+              <a class="dropdown-item" (click)="openEditingModal(editModal, i)" href="#">Edit</a>
+              <a class="dropdown-item" (click)="openRemovingModal(removeModal, i)" href="#">Delete</a>
             </div>
           </div>
         </td>
@@ -57,8 +57,8 @@
   </nav>
 </div>
 
-<!-- modal -->
-<ng-template #content let-modal>
+<!-- remove modal -->
+<ng-template #removeModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-title">Removing Item</h4>
     <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
@@ -79,5 +79,130 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- modal -->
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editing Item</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); itemEditForm.reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="itemEditForm">
+      <div class="form-group">
+        <label for="name">
+          <label for="validationServer01">Name: </label>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+
+        <input
+          formControlName="name"
+          id="name"
+          type="text"
+          style="transition: none"
+          [ngClass]="[
+            'form-control',
+            itemEditForm.controls['name']?.dirty && itemEditForm.controls['name']?.valid ? 'is-valid' : '',
+            itemEditForm.controls['name']?.dirty && itemEditForm.controls['name']?.invalid ? 'is-invalid' : ''
+          ]"
+          placeholder="Item's Name"
+          required
+        />
+        <div
+          *ngIf="itemEditForm.controls['name']?.dirty && itemEditForm.controls['name']?.invalid"
+          class="invalid-feedback"
+        >
+          Please provide a valid name.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">
+          <label for="validationServer01">Description: </label>
+        </label>
+        <input
+          formControlName="description"
+          id="description"
+          type="text"
+          style="transition: none"
+          [ngClass]="[
+            'form-control',
+            itemEditForm.controls['description']?.dirty && itemEditForm.controls['description']?.valid
+              ? 'is-valid'
+              : '',
+            itemEditForm.controls['description']?.dirty && itemEditForm.controls['description']?.invalid
+              ? 'is-invalid'
+              : ''
+          ]"
+          value=""
+          placeholder="Item's Description"
+        />
+        <div
+          *ngIf="itemEditForm.controls['description']?.dirty && itemEditForm.controls['description']?.invalid"
+          class="invalid-feedback"
+        >
+          Please provide a valid description.
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-sm">
+          <label for="validationServer03">Price: </label>
+          <strong><abbr title="required">*</abbr></strong>
+          <input
+            formControlName="price"
+            id="price"
+            type="text"
+            style="transition: none"
+            [ngClass]="[
+              'form-control',
+              itemEditForm.controls['price']?.dirty && itemEditForm.controls['price']?.valid ? 'is-valid' : '',
+              itemEditForm.controls['price']?.dirty && itemEditForm.controls['price']?.invalid ? 'is-invalid' : ''
+            ]"
+            placeholder="Price"
+            required
+          />
+          <div class="invalid-feedback">Please provide a valid amount.</div>
+        </div>
+
+        <div class="col-sm">
+          <label for="validationServer04">Quantity: </label>
+          <strong><abbr title="required">*</abbr></strong>
+          <input
+            formControlName="quantity"
+            id="quantity"
+            type="text"
+            style="transition: none"
+            [ngClass]="[
+              'form-control',
+              itemEditForm.controls['quantity']?.dirty && itemEditForm.controls['quantity']?.valid ? 'is-valid' : '',
+              itemEditForm.controls['quantity']?.dirty && itemEditForm.controls['quantity']?.invalid ? 'is-invalid' : ''
+            ]"
+            placeholder="Quantity"
+            value="0"
+            required
+          />
+          <div
+            *ngIf="itemEditForm.controls['quantity']?.dirty && itemEditForm.controls['quantity']?.invalid"
+            class="invalid-feedback"
+          >
+            Please provide a valid quantity.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="submit"
+      [disabled]="!itemEditForm.valid"
+      [ngClass]="['btn', itemEditForm.valid ? 'btn-outline-primary' : 'btn-link']"
+      (click)="modal.close('Ok click')"
+    >
+      Edit
+    </button>
   </div>
 </ng-template>
