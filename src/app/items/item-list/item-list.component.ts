@@ -84,12 +84,7 @@ export class ItemListComponent implements OnInit {
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
-
         const price = this.itemEditForm.value.price.replace(/\$|,/g, '');
-
-	console.log(price)
-        console.log({ id: itemToEdit.id, price: price, ...this.itemEditForm.value })
-
         this.itemService.update({ id: itemToEdit.id, ...this.itemEditForm.value, price: price } as Item).subscribe(
           (item) => {
             this.items[index] = item;
